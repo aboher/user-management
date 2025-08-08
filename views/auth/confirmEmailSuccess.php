@@ -9,7 +9,7 @@ use yii\helpers\Html;
  */
 
 $this->title = UserManagementModule::t('front', 'E-mail confirmed');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="change-own-password-success">
 

@@ -10,7 +10,7 @@ use yii\helpers\Html;
  */
 
 $this->title = UserManagementModule::t('back', 'Change own password');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="change-own-password">
 

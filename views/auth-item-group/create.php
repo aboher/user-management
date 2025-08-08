@@ -9,8 +9,8 @@ use yii\helpers\Html;
  */
 
 $this->title = UserManagementModule::t('back', 'Creating permission group');
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="auth-item-group-create">
 

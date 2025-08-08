@@ -16,8 +16,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 $this->title = UserManagementModule::t('back', 'Permissions for role:') . ' '. $role->description;
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 
 <h2 class="lte-hide-title"><?= $this->title ?></h2>

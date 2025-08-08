@@ -15,8 +15,8 @@ use yii\helpers\Html;
 BootstrapPluginAsset::register($this);
 $this->title = UserManagementModule::t('back', 'Roles and permissions for user:') . ' ' . $user->username;
 
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['/user-management/user/index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['/user-management/user/index']];
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 
 <h2 class="lte-hide-title"><?= $this->title ?></h2>

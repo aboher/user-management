@@ -7,10 +7,10 @@ use webvimark\modules\UserManagement\UserManagementModule;
  * @var webvimark\modules\UserManagement\models\User $model
  */
 
-$this->title = UserManagementModule::t('back', 'Editing user: ') . ' ' . $model->username;
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = UserManagementModule::t('back', 'Editing');
+// $this->title = UserManagementModule::t('back', 'Editing user: ') . ' ' . $model->username;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
+// $this->params['breadcrumbs'][] = UserManagementModule::t('back', 'Editing');
 ?>
 <div class="user-update">
 

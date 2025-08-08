@@ -8,7 +8,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
  */
 
 $this->title = UserManagementModule::t('front', 'Registration - confirm your e-mail');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="registration-wait-for-confirmation">
 

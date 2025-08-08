@@ -17,7 +17,7 @@ use yii\widgets\Pjax;
  * @var yii\web\View $this
  */
 $this->title = UserManagementModule::t('back', 'Permissions');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 
 ?>
 

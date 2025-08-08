@@ -10,8 +10,8 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Visit log'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Visit log'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="user-visit-log-view">
 

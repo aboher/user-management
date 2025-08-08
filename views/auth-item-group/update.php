@@ -9,9 +9,9 @@ use yii\helpers\Html;
  */
 
 $this->title = UserManagementModule::t('back', 'Editing permission group') . ': ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->code]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Editing')
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->code]];
+// $this->params['breadcrumbs'][] = Yii::t('app', 'Editing')
 ?>
 <div class="auth-item-group-update">
 

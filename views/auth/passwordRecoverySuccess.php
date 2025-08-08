@@ -7,7 +7,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
  */
 
 $this->title = UserManagementModule::t('front', 'Password recovery');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="password-recovery-success">
 

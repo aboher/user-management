@@ -17,7 +17,7 @@ use yii\grid\GridView;
  */
 
 $this->title = UserManagementModule::t('back', 'Permission groups');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="auth-item-group-index">
 

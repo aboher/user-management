@@ -8,8 +8,8 @@
 use webvimark\modules\UserManagement\UserManagementModule;
 
 $this->title = UserManagementModule::t('back', 'Role creation');
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 
 <h2 class="lte-hide-title"><?= $this->title ?></h2>

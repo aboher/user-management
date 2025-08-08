@@ -10,9 +10,9 @@ use yii\helpers\Html;
  */
 
 $this->title = UserManagementModule::t('back', 'Changing password for user: ') . ' ' . $model->username;
-$this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = UserManagementModule::t('back', 'Changing password');
+// $this->params['breadcrumbs'][] = ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
+// $this->params['breadcrumbs'][] = UserManagementModule::t('back', 'Changing password');
 ?>
 <div class="user-update">
 

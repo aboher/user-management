@@ -14,7 +14,7 @@ use yii\grid\GridView;
  */
 
 $this->title = UserManagementModule::t('back', 'Visit log');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title; // comment to hide breadcrumbs
 ?>
 <div class="user-visit-log-index">
 
