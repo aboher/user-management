@@ -28,6 +28,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $superadmin
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $ref_identity
  */
 class User extends UserIdentity
 {
@@ -247,7 +248,7 @@ class User extends UserIdentity
 	*/
 	public function rules()
 	{
-		return [
+		$rules = [
 			['username', 'required'],
 			['username', 'unique'],
 			['username', 'trim'],
@@ -269,6 +270,14 @@ class User extends UserIdentity
 			['repeat_password', 'required', 'on'=>['newUser', 'changePassword']],
 			['repeat_password', 'compare', 'compareAttribute'=>'password'],
 		];
+
+		if ($this->hasIdentityClass()) {
+            $rules[] = ['ref_identity', 'required', 'message' => UserManagementModule::t('back', 'Every user must have an identity')];
+			$rules[] = ['ref_identity', 'unique', 'message' => UserManagementModule::t('back', 'This identity is already assigned to another user')];
+			$rules[] = ['ref_identity', 'integer'];
+        }
+		
+		return $rules;
 	}
 
 	/**
@@ -416,5 +425,99 @@ class User extends UserIdentity
 		}
 
 		return parent::beforeDelete();
+	}
+
+	/**
+     * Check if the module has identityClass configured
+     * @return bool
+     */
+    protected function hasIdentityClass()
+    {
+        $module = \Yii::$app->getModule('user-management');
+        return $module && !empty($module->identityClass);
+    }
+
+	/**
+     * @inheritdoc
+     */
+    public function attributes()
+    {
+        $attributes = parent::attributes();
+        
+        if ($this->hasIdentityClass()) {
+            return $attributes;
+        } else {
+            return array_diff($attributes, ['ref_identity']);
+        }
+    }
+
+	/**
+     * @inheritdoc
+     */
+    public function hasAttribute($name)
+    {
+        if ($name === 'ref_identity' && !$this->hasIdentityClass()) {
+            return false;
+        }
+        return parent::hasAttribute($name);
+    }
+    
+    /**
+     * Magic getter to handle ref_identity conditionally
+     */
+    public function __get($name)
+    {
+        if ($name === 'ref_identity' && !$this->hasIdentityClass()) {
+            return null;
+        }
+        return parent::__get($name);
+    }
+    
+    /**
+     * Magic setter to handle ref_identity conditionally
+     */
+    public function __set($name, $value)
+    {
+        if ($name === 'ref_identity' && !$this->hasIdentityClass()) {
+            // Silently ignore setting ref_identity if identityClass is not configured
+            return;
+        }
+        parent::__set($name, $value);
+    }
+    
+    /**
+     * Override canGetProperty to handle ref_identity
+     */
+    public function canGetProperty($name, $checkVars = true, $checkBehaviors = true)
+    {
+        if ($name === 'ref_identity' && !$this->hasIdentityClass()) {
+            return false;
+        }
+        return parent::canGetProperty($name, $checkVars, $checkBehaviors);
+    }
+    
+    /**
+     * Override canSetProperty to handle ref_identity
+     */
+    public function canSetProperty($name, $checkVars = true, $checkBehaviors = true)
+    {
+        if ($name === 'ref_identity' && !$this->hasIdentityClass()) {
+            return false;
+        }
+        return parent::canSetProperty($name, $checkVars, $checkBehaviors);
+    }
+
+	/**
+	 * This method retrives from the database the identity linked to the user
+	 */
+	public function getIdentity()
+	{
+		if (!$this->hasIdentityClass()) {
+            return null;
+        }
+
+		$identityClass = Yii::$app->getModule('user-management')->identityClass;
+
+		return $this->hasOne($identityClass, ['id' => 'ref_identity']);
 	}
 }

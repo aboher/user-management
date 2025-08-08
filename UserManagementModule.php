@@ -185,6 +185,8 @@ class UserManagementModule extends \yii\base\Module
 
 	public $controllerNamespace = 'webvimark\modules\UserManagement\controllers';
 
+	public $identityClass = null;
+
 	/**
 	 * @p
 	 */

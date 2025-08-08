@@ -53,6 +53,9 @@ Configuration
 	'user-management' => [
 		'class' => 'webvimark\modules\UserManagement\UserManagementModule',
 
+		// 'identityClass' => 'app\models\MyCustomIdentityClass', 	// Uncomment if you want to specify an identityClass
+																	// 	if you want more information, please refer to the identityClass section
+
 		// 'enableRegistration' => true,
 
 		// Add regexp validation to passwords. Default pattern does not restrict user and can enter any set of characters.
@@ -97,7 +100,9 @@ To see full list of options check *UserManagementModule* file
 'modules'=>[
 	'user-management' => [
 		'class' => 'webvimark\modules\UserManagement\UserManagementModule',
-	        'controllerNamespace'=>'vendor\webvimark\modules\UserManagement\controllers', // To prevent yii help from crashing
+	    'controllerNamespace'=>'vendor\webvimark\modules\UserManagement\controllers', // To prevent yii help from crashing
+		// 'identityClass' => 'app\models\MyCustomIdentityClass', 	// Uncomment if you want to specify an identityClass
+																	// 	if you want more information, please refer to the identityClass section
 	],
 ],
 
@@ -221,6 +226,23 @@ Role::removeChildren($parentName, $childrenNames)
 
 ```
 
+IdentityClass
+------
+
+Sometimes, user details are stored in a different table rather than in the main user table. If that's your case, you can link your user details table with the users table by uncommenting the _identityClass_ property specified in the [Configuration](#Configuration) section, and assigning it your user details model (this model must be an Active Record class).
+
+After specifying an identity class, when you run the migrations to create the users table, a foreign key will be added to link the user details inside the user table. For this reason, you must configure the identity class before running the migrations.
+
+Lastly, you must override the user _create_ and _update_ views to add the ref_identity field to the form. This can be done using [Yii Themes](https://www.yiiframework.com/doc/guide/2.0/en/output-theming).
+
+Once everything is set up, you can access the identity of the logged-in user through the ref_identity property on the user model, or directly by retrieving the identity class instance corresponding to the logged-in user:
+
+```php
+
+Yii::$app->user->ref_identity;	// returns the id of the identity
+Yii::$app->user->identity();	// returns the instance of the Identity class from the user
+
+```
 
 Events
 ------

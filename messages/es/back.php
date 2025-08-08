@@ -95,4 +95,6 @@ return [
     'Wrong format. Enter valid IPs separated by comma' => 'Formato incorrecto. Ingrese IPs válidas separadas por coma.', 
     'Wrong password' => 'Contraseña incorrecta',
     'You can not change own permissions' => 'No puede cambiar sus propios permisos',
+    'Every user must have an identity' => 'Cada usuario debe tener una identidad',
+    'This identity is already assigned to another user' => 'Esta identidad ya está asignada a otro usuario',
 ];
