@@ -8,7 +8,7 @@
 use webvimark\modules\UserManagement\components\GhostHtml;
 use webvimark\modules\UserManagement\models\rbacDB\Role;
 use webvimark\modules\UserManagement\UserManagementModule;
-use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -29,53 +29,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
 	<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> <?= UserManagementModule::t('back', 'Roles') ?>
+					<i class="bi bi-grid-3x3-gap-fill"></i> <?= UserManagementModule::t('back', 'Roles') ?>
 				</strong>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 
 				<?= Html::beginForm(['set-roles', 'id'=>$user->id]) ?>
 
 				<?php foreach (Role::getAvailableRoles() as $aRole): ?>
-					<label>
+					<div class="form-check">
 						<?php $isChecked = in_array($aRole['name'], ArrayHelper::map(Role::getUserRoles($user->id), 'name', 'name')) ? 'checked' : '' ?>
 
+						<?= GhostHtml::a(
+							'<i class="bi bi-pencil-square"></i>',
+							['/user-management/role/view', 'id'=>$aRole['name']],
+							['target'=>'_blank']
+						) ?>
+
 						<?php if ( Yii::$app->getModule('user-management')->userCanHaveMultipleRoles ): ?>
-							<input type="checkbox" <?= $isChecked ?> name="roles[]" value="<?= $aRole['name'] ?>">
-
+							<input class="form-check-input" type="checkbox" <?= $isChecked ?> name="roles[]" value="<?= $aRole['name'] ?>" id="role_<?= $aRole['name'] ?>">
 						<?php else: ?>
-							<input type="radio" <?= $isChecked ?> name="roles" value="<?= $aRole['name'] ?>">
-
+							<input class="form-check-input" type="radio" <?= $isChecked ?> name="roles" value="<?= $aRole['name'] ?>" id="role_<?= $aRole['name'] ?>">
 						<?php endif; ?>
 
-						<?= $aRole['description'] ?>
-					</label>
-
-					<?= GhostHtml::a(
-						'<span class="glyphicon glyphicon-edit"></span>',
-						['/user-management/role/view', 'id'=>$aRole['name']],
-						['target'=>'_blank']
-					) ?>
-					<br/>
+						<label class="form-check-label" for="role_<?= $aRole['name'] ?>">
+							<?= $aRole['description'] ?>
+						</label>
+					</div>
 				<?php endforeach ?>
 
 				<br/>
 
-				<?php if ( Yii::$app->user->isSuperadmin OR Yii::$app->user->id != $user->id ): ?>
+				<div class="mt-3">
+					<?php if ( Yii::$app->user->isSuperadmin OR Yii::$app->user->id != $user->id ): ?>
 
-					<?= Html::submitButton(
-						'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
-						['class'=>'btn btn-primary btn-sm']
-					) ?>
-				<?php else: ?>
-					<div class="alert alert-warning well-sm text-center">
-						<?= UserManagementModule::t('back', 'You can not change own permissions') ?>
-					</div>
-				<?php endif; ?>
-
+						<?= Html::submitButton(
+							'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
+							['class'=>'btn btn-primary btn-sm']
+						) ?>
+					<?php else: ?>
+						<div class="alert alert-warning text-center">
+							<?= UserManagementModule::t('back', 'You can not change own permissions') ?>
+						</div>
+					<?php endif; ?>
+				</div>
 
 				<?= Html::endForm() ?>
 			</div>
@@ -83,30 +83,30 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 
 	<div class="col-sm-8">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> <?= UserManagementModule::t('back', 'Permissions') ?>
+					<i class="bi bi-grid-3x3-gap-fill"></i> <?= UserManagementModule::t('back', 'Permissions') ?>
 				</strong>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 
 				<div class="row">
 					<?php foreach ($permissionsByGroup as $groupName => $permissions): ?>
 
 						<div class="col-sm-6">
-							<fieldset>
-								<legend><?= $groupName ?></legend>
+							<fieldset class="mb-3">
+								<legend class="fs-5"><?= $groupName ?></legend>
 
-								<ul>
+								<ul class="list-unstyled">
 									<?php foreach ($permissions as $permission): ?>
-										<li>
+										<li class="mb-2">
 											<?= $permission->description ?>
 
 											<?= GhostHtml::a(
-												'<span class="glyphicon glyphicon-edit"></span>',
+												'<i class="bi bi-pencil-square"></i>',
 												['/user-management/permission/view', 'id'=>$permission->name],
-												['target'=>'_blank']
+												['target'=>'_blank', 'class'=>'ms-2']
 											) ?>
 										</li>
 									<?php endforeach ?>

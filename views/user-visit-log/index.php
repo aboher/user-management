@@ -20,12 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<div class="panel panel-default">
+	<div class="card">
 
-		<div class="panel-body">
+		<div class="card-body">
 
 			<div class="row">
-				<div class="col-sm-12 text-right">
+				<div class="col-sm-3 offset-sm-9 text-end">
 					<?= GridPageSize::widget(['pjaxId'=>'user-visit-log-grid-pjax']) ?>
 				</div>
 			</div>
@@ -40,10 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				'pager'=>[
 					'options'=>['class'=>'pagination pagination-sm'],
 					'hideOnSinglePage'=>true,
+					'linkOptions'=>['class'=>'page-link'],
+					'disabledListItemSubTagOptions'=>['class'=>'page-link disabled'],
 					'lastPageLabel'=>'>>',
 					'firstPageLabel'=>'<<',
 				],
-				'layout'=>'{items}<div class="row"><div class="col-sm-8">{pager}</div><div class="col-sm-4 text-right">{summary}</div></div>',
+				'layout'=>'{items}<div class="row"><div class="col-sm-8">{pager}</div><div class="col-sm-4 text-end">{summary}</div></div>',
 				'filterModel' => $searchModel,
 				'columns' => [
 					['class' => 'yii\grid\SerialColumn', 'options'=>['style'=>'width:10px'] ],

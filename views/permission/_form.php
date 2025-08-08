@@ -1,12 +1,12 @@
 <?php
 /**
- * @var yii\widgets\ActiveForm $form
+ * @var yii\bootstrap5\ActiveForm $form
  * @var webvimark\modules\UserManagement\models\rbacDB\Permission $model
  */
 
 use webvimark\modules\UserManagement\models\rbacDB\AuthItemGroup;
 use webvimark\modules\UserManagement\UserManagementModule;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 ?>
@@ -24,16 +24,16 @@ use yii\helpers\Html;
 	<?= $form->field($model, 'group_code')
 		->dropDownList(ArrayHelper::map(AuthItemGroup::find()->asArray()->all(), 'code', 'name'), ['prompt'=>'']) ?>
 
-	<div class="form-group">
-		<div class="col-sm-offset-3 col-sm-9">
+	<div class="row mb-3">
+		<div class="col-sm-9">
 			<?php if ( $model->isNewRecord ): ?>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-plus-sign"></span> ' . UserManagementModule::t('back', 'Create'),
+					'<i class="bi bi-plus-lg"></i> ' . UserManagementModule::t('back', 'Create'),
 					['class' => 'btn btn-success']
 				) ?>
 			<?php else: ?>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class' => 'btn btn-primary']
 				) ?>
 			<?php endif; ?>

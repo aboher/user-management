@@ -35,35 +35,37 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
 	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> <?= UserManagementModule::t('back', 'Child permissions') ?>
+					<i class="bi bi-grid-3x3-gap-fill"></i> <?= UserManagementModule::t('back', 'Child permissions') ?>
 				</strong>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 
 				<?= Html::beginForm(['set-child-permissions', 'id'=>$item->name]) ?>
 
 				<div class="row">
 					<?php foreach ($permissionsByGroup as $groupName => $permissions): ?>
 						<div class="col-sm-6">
-							<fieldset>
+							<fieldset class="border p-3 mb-3">
 								<legend><?= $groupName ?></legend>
 
 								<?php foreach ($permissions as $permission): ?>
-									<label>
+									<div class="form-check">
 										<?php $isChecked = in_array($permission->name, ArrayHelper::map($childPermissions, 'name', 'name')) ? 'checked' : '' ?>
-										<input type="checkbox" <?= $isChecked ?> name="child_permissions[]" value="<?= $permission->name ?>">
-										<?= $permission->description ?>
-									</label>
-
-									<?= GhostHtml::a(
-										'<span class="glyphicon glyphicon-edit"></span>',
-										['view', 'id'=>$permission->name],
-										['target'=>'_blank']
-									) ?>
-									<br/>
+										<input class="form-check-input" type="checkbox" <?= $isChecked ?> name="child_permissions[]" value="<?= $permission->name ?>" id="permission_<?= $permission->name ?>">
+										<?= GhostHtml::a(
+											'<i class="bi bi-pencil-square"></i>',
+											['view', 'id'=>$permission->name],
+											['target'=>'_blank']
+										) ?>
+										<label class="form-check-label" for="permission_<?= $permission->name ?>">
+											<?= $permission->description ?>
+										</label>
+										
+										<br/>
+									</div>
 								<?php endforeach ?>
 
 							</fieldset>
@@ -77,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<hr/>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class'=>'btn btn-primary btn-sm']
 				) ?>
 
@@ -87,16 +89,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 
 	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> Routes
+					<i class="bi bi-grid-3x3-gap-fill"></i> Routes
 
 					<?= Html::a(
 						UserManagementModule::t('back', 'Refresh routes (and delete unused)'),
 						['refresh-routes', 'id'=>$item->name, 'deleteUnused'=>1],
 						[
-							'class' => 'btn btn-default btn-sm pull-right',
+							'class' => 'btn btn-default btn-sm float-end ms-2',
 							'style'=>'margin-top:-5px; text-transform:none;',
 							'data-confirm'=>UserManagementModule::t('back', 'Routes that are not exists in this application will be deleted. Do not recommended for application with "advanced" structure, because frontend and backend have they own set of routes.'),
 						]
@@ -106,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						UserManagementModule::t('back', 'Refresh routes'),
 						['refresh-routes', 'id'=>$item->name],
 						[
-							'class' => 'btn btn-default btn-sm pull-right',
+							'class' => 'btn btn-default btn-sm float-end',
 							'style'=>'margin-top:-5px; text-transform:none;',
 						]
 					) ?>
@@ -115,27 +117,27 @@ $this->params['breadcrumbs'][] = $this->title;
 				</strong>
 			</div>
 
-			<div class="panel-body">
+			<div class="card-body">
 
 				<?= Html::beginForm(['set-child-routes', 'id'=>$item->name]) ?>
 
 				<div class="row">
 					<div class="col-sm-3">
 						<?= Html::submitButton(
-							'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+							'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 							['class'=>'btn btn-primary btn-sm']
 						) ?>
 					</div>
 
 					<div class="col-sm-6">
-						<input id="search-in-routes" autofocus="on" type="text" class="form-control input-sm" placeholder="<?= UserManagementModule::t('back', 'Search route'); ?>">
+						<input id="search-in-routes" autofocus="on" type="text" class="form-control form-control-sm" placeholder="<?= UserManagementModule::t('back', 'Search route'); ?>">
 					</div>
 
-					<div class="col-sm-3 text-right">
+					<div class="col-sm-3 text-end">
 						<span id="show-only-selected-routes" class="btn btn-default btn-sm">
 							<i class="fa fa-minus"></i> <?= UserManagementModule::t('back', 'Show only selected'); ?>
 						</span>
-						<span id="show-all-routes" class="btn btn-default btn-sm hide">
+						<span id="show-all-routes" class="btn btn-default btn-sm d-none">
 							<i class="fa fa-plus"></i> <?= UserManagementModule::t('back', 'Show all'); ?>
 						</span>
 
@@ -152,19 +154,20 @@ $this->params['breadcrumbs'][] = $this->title;
 						'id'=>'routes-list',
 						'separator'=>'<div class="separator"></div>',
 						'item'=>function($index, $label, $name, $checked, $value) {
-								return Html::checkbox($name, $checked, [
-									'value' => $value,
-									'label' => '<span class="route-text">' . $label . '</span>',
-									'labelOptions'=>['class'=>'route-label'],
-									'class'=>'route-checkbox',
-								]);
+							return Html::checkbox($name, $checked, [
+								'value' => $value,
+								'label' => '<span class="route-text">' . $label . '</span>',
+								'labelOptions'=>['class'=>'route-label form-check-label'],
+								'class'=>'route-checkbox form-check-input',
+
+							]);
 						},
 					]
 				) ?>
 
 				<hr/>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class'=>'btn btn-primary btn-sm']
 				) ?>
 
@@ -185,8 +188,8 @@ var routeText = $('.route-text');
 var backgroundColor = '#D6FFDE';
 
 function showAllRoutesBack() {
-	$('#routes-list').find('.hide').each(function(){
-		$(this).removeClass('hide');
+	$('#routes-list').find('.d-none').each(function(){
+		$(this).removeClass('d-none');
 	});
 }
 
@@ -233,24 +236,24 @@ routeCheckboxes.on('change', function(){
 
 // Hide on not selected routes
 $('#show-only-selected-routes').on('click', function(){
-	$(this).addClass('hide');
-	$('#show-all-routes').removeClass('hide');
+	$(this).addClass('d-none');
+	$('#show-all-routes').removeClass('d-none');
 
 	routeCheckboxes.each(function(){
 		var _t = $(this);
 
 		if ( ! _t.is(':checked') )
 		{
-			_t.closest('label').addClass('hide');
-			_t.closest('div.separator').addClass('hide');
+			_t.closest('label').addClass('d-none');
+			_t.closest('div.separator').addClass('d-none');
 		}
 	});
 });
 
 // Show all routes back
 $('#show-all-routes').on('click', function(){
-	$(this).addClass('hide');
-	$('#show-only-selected-routes').removeClass('hide');
+	$(this).addClass('d-none');
+	$('#show-only-selected-routes').removeClass('d-none');
 
 	showAllRoutesBack();
 });
@@ -270,13 +273,13 @@ $('#search-in-routes').on('change keyup', function(){
 
 		if ( _t.html().indexOf(input.val()) > -1 )
 		{
-			_t.closest('label').removeClass('hide');
-			_t.closest('div.separator').removeClass('hide');
+			_t.closest('label').removeClass('d-none');
+			_t.closest('div.separator').removeClass('d-none');
 		}
 		else
 		{
-			_t.closest('label').addClass('hide');
-			_t.closest('div.separator').addClass('hide');
+			_t.closest('label').addClass('d-none');
+			_t.closest('div.separator').addClass('d-none');
 		}
 	});
 });

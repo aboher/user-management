@@ -25,21 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<div class="panel panel-default">
+	<div class="card">
 
-		<div class="panel-body">
+		<div class="card-body">
 			<div class="row">
 				<div class="col-sm-6">
 					<p>
 						<?= GhostHtml::a(
-							'<span class="glyphicon glyphicon-plus-sign"></span> ' . UserManagementModule::t('back', 'Create'),
+							'<i class="bi bi-plus-lg"></i> ' . UserManagementModule::t('back', 'Create'),
 							['create'],
 							['class' => 'btn btn-success']
 						) ?>
 					</p>
 				</div>
 
-				<div class="col-sm-6 text-right">
+				<div class="col-sm-3 offset-sm-3 text-end">
 					<?= GridPageSize::widget(['pjaxId'=>'auth-item-group-grid-pjax']) ?>
 				</div>
 			</div>
@@ -55,10 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				'pager'=>[
 					'options'=>['class'=>'pagination pagination-sm'],
 					'hideOnSinglePage'=>true,
+					'linkOptions'=>['class'=>'page-link'],
+					'disabledListItemSubTagOptions'=>['class'=>'page-link disabled'],
 					'lastPageLabel'=>'>>',
 					'firstPageLabel'=>'<<',
 				],
-				'layout'=>'{items}<div class="row"><div class="col-sm-8">{pager}</div><div class="col-sm-4 text-right">{summary}'.GridBulkActions::widget([
+				'layout'=>'{items}<div class="row"><div class="col-sm-8">{pager}</div><div class="col-sm-4 text-end">{summary}'.GridBulkActions::widget([
 						'gridId'=>'auth-item-group-grid',
 						'actions'=>[Url::to(['bulk-delete'])=>GridBulkActions::t('app', 'Delete'),],
 						]).'</div></div>',

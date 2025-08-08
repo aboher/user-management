@@ -1,7 +1,7 @@
 <?php
 
 use webvimark\modules\UserManagement\UserManagementModule;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
 /**
@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<h2 class="lte-hide-title"><?= $this->title ?></h2>
 
-	<div class="panel panel-default">
-		<div class="panel-body">
+	<div class="card">
+		<div class="card-body">
 
 			<?php if ( Yii::$app->session->hasFlash('error') ): ?>
 				<div class="alert alert-warning text-center">
@@ -36,10 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<?= $form->field($model, 'email')->textInput(['maxlength' => 255, 'autofocus'=>true]) ?>
 
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
+				<div class="row mb-3">
+					<div class="col-sm-9 offset-sm-3">
 						<?= Html::submitButton(
-							'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('front', 'Confirm'),
+							'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('front', 'Confirm'),
 							['class' => 'btn btn-primary']
 						) ?>
 					</div>

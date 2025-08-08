@@ -11,7 +11,6 @@
  */
 
 use webvimark\modules\UserManagement\components\GhostHtml;
-use webvimark\modules\UserManagement\models\rbacDB\Role;
 use webvimark\modules\UserManagement\UserManagementModule;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -36,34 +35,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
 	<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> <?= UserManagementModule::t('back', 'Child roles') ?>
+					<i class="bi bi-grid-3x3-gap-fill"></i> <?= UserManagementModule::t('back', 'Child roles') ?>
 				</strong>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 				<?= Html::beginForm(['set-child-roles', 'id'=>$role->name]) ?>
 
 				<?php foreach ($allRoles as $aRole): ?>
-					<label>
+					<div class="form-check">
 						<?php $isChecked = in_array($aRole['name'], ArrayHelper::map($childRoles, 'name', 'name')) ? 'checked' : '' ?>
-						<input type="checkbox" <?= $isChecked ?> name="child_roles[]" value="<?= $aRole['name'] ?>">
-						<?= $aRole['description'] ?>
-					</label>
-
-					<?= GhostHtml::a(
-						'<span class="glyphicon glyphicon-edit"></span>',
-						['/user-management/role/view', 'id'=>$aRole['name']],
-						['target'=>'_blank']
-					) ?>
-					<br/>
+						<input class="form check-input" type="checkbox" <?= $isChecked ?> name="child_roles[]" value="<?= $aRole['name'] ?>" id="role_<?= $aRole['name'] ?>">
+						<?= GhostHtml::a(
+							'<i class="bi bi-pencil-square"></i>',
+							['/user-management/role/view', 'id'=>$aRole['name']],
+							['target'=>'_blank']
+						) ?>
+						<label class="form-check-label" for="role_<?= $aRole['name'] ?>">
+							<?= $aRole['description'] ?>
+						</label>
+					</div>
 				<?php endforeach ?>
 
 
 				<hr/>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class'=>'btn btn-primary btn-sm']
 				) ?>
 
@@ -73,34 +72,34 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 
 	<div class="col-sm-8">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="card">
+			<div class="card-header">
 				<strong>
-					<span class="glyphicon glyphicon-th"></span> <?= UserManagementModule::t('back', 'Permissions') ?>
+					<i class="bi bi-grid-3x3-gap-fill"></i> <?= UserManagementModule::t('back', 'Permissions') ?>
 				</strong>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 				<?= Html::beginForm(['set-child-permissions', 'id'=>$role->name]) ?>
 
 				<div class="row">
 					<?php foreach ($permissionsByGroup as $groupName => $permissions): ?>
 						<div class="col-sm-6">
-							<fieldset>
+							<fieldset class="border p-3 mb-3">
 								<legend><?= $groupName ?></legend>
 
 								<?php foreach ($permissions as $permission): ?>
-									<label>
+									<div class="form-check">
 										<?php $isChecked = in_array($permission->name, ArrayHelper::map($currentPermissions, 'name', 'name')) ? 'checked' : '' ?>
-										<input type="checkbox" <?= $isChecked ?> name="child_permissions[]" value="<?= $permission->name ?>">
-										<?= $permission->description ?>
-									</label>
-
-									<?= GhostHtml::a(
-										'<span class="glyphicon glyphicon-edit"></span>',
-										['/user-management/permission/view', 'id'=>$permission->name],
-										['target'=>'_blank']
-									) ?>
-									<br/>
+										<input class="form-check-input" type="checkbox" <?= $isChecked ?> name="child_permissions[]" value="<?= $permission->name ?>" id="perm_<?= $permission->name ?>">
+										<?= GhostHtml::a(
+											'<i class="bi bi-pencil-square"></i>',
+											['/user-management/permission/view', 'id'=>$permission->name],
+											['target'=>'_blank']
+										) ?>
+										<label class="form-check-label" for="perm_<?= $permission->name ?>">
+											<?= $permission->description ?>
+										</label>
+									</div>
 								<?php endforeach ?>
 
 							</fieldset>
@@ -113,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<hr/>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class'=>'btn btn-primary btn-sm']
 				) ?>
 

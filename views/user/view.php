@@ -21,20 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<h2 class="lte-hide-title"><?= $this->title ?></h2>
 
-	<div class="panel panel-default">
-		<div class="panel-body">
+	<div class="card">
+		<div class="card-body">
 
 		    <p>
-			<?= GhostHtml::a(UserManagementModule::t('back', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
-			<?= GhostHtml::a(UserManagementModule::t('back', 'Create'), ['create'], ['class' => 'btn btn-sm btn-success']) ?>
+			<?= GhostHtml::a(UserManagementModule::t('back', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+			<?= GhostHtml::a(UserManagementModule::t('back', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
 			<?= GhostHtml::a(
 				UserManagementModule::t('back', 'Roles and permissions'),
 				['/user-management/user-permission/set', 'id'=>$model->id],
-				['class' => 'btn btn-sm btn-default']
+				['class' => 'btn btn-secondary']
 			) ?>
 
 			<?= GhostHtml::a(UserManagementModule::t('back', 'Delete'), ['delete', 'id' => $model->id], [
-			    'class' => 'btn btn-sm btn-danger pull-right',
+			    'class' => 'btn btn-danger',
 			    'data' => [
 				'confirm' => UserManagementModule::t('back', 'Are you sure you want to delete this user?'),
 				'method' => 'post',
@@ -73,12 +73,12 @@ $this->params['breadcrumbs'][] = $this->title;
 						'attribute'=>'bind_to_ip',
 						'visible'=>User::hasPermission('bindUserToIp'),
 					],
-					array(
+					[
 						'attribute'=>'registration_ip',
 						'value'=>Html::a($model->registration_ip, "http://ipinfo.io/" . $model->registration_ip, ["target"=>"_blank"]),
 						'format'=>'raw',
 						'visible'=>User::hasPermission('viewRegistrationIp'),
-					),
+					],
 					'created_at:datetime',
 					'updated_at:datetime',
 				],

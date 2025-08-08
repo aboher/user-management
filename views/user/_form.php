@@ -3,13 +3,13 @@
 use webvimark\modules\UserManagement\models\User;
 use webvimark\modules\UserManagement\UserManagementModule;
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 
 /**
  * @var yii\web\View $this
  * @var webvimark\modules\UserManagement\models\User $model
- * @var yii\bootstrap\ActiveForm $form
+ * @var yii\bootstrap5\ActiveForm $form
  */
 ?>
 
@@ -50,16 +50,16 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 	<?php endif; ?>
 
 
-	<div class="form-group">
-		<div class="col-sm-offset-3 col-sm-9">
+	<div class="row-mb-3">
+		<div class="col-sm-9">
 			<?php if ( $model->isNewRecord ): ?>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-plus-sign"></span> ' . UserManagementModule::t('back', 'Create'),
+					'<i class="bi bi-plus-lg"></i> ' . UserManagementModule::t('back', 'Create'),
 					['class' => 'btn btn-success']
 				) ?>
 			<?php else: ?>
 				<?= Html::submitButton(
-					'<span class="glyphicon glyphicon-ok"></span> ' . UserManagementModule::t('back', 'Save'),
+					'<i class="bi bi-check-lg"></i> ' . UserManagementModule::t('back', 'Save'),
 					['class' => 'btn btn-primary']
 				) ?>
 			<?php endif; ?>

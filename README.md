@@ -1,8 +1,6 @@
 User management module for Yii 2
 =====
 
-`This repository is not actively maintained. If you want to add some changes, just fork it and safely use your fork.`
-
 Perks
 ---
 

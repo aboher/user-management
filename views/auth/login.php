@@ -6,18 +6,18 @@
 
 use webvimark\modules\UserManagement\components\GhostHtml;
 use webvimark\modules\UserManagement\UserManagementModule;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 ?>
 
 <div class="container" id="login-wrapper">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><?= UserManagementModule::t('front', 'Authorization') ?></h3>
+		<div class="offset-md-4 col-md-4">
+			<div class="card">
+				<div class="card-header">
+					<h5><?= UserManagementModule::t('front', 'Authorization') ?></h5>
 				</div>
-				<div class="panel-body">
+				<div class="card-body">
 
 					<?php $form = ActiveForm::begin([
 						'id'      => 'login-form',
@@ -38,7 +38,7 @@ use yii\helpers\Html;
 
 					<?= Html::submitButton(
 						UserManagementModule::t('front', 'Login'),
-						['class' => 'btn btn-lg btn-primary btn-block']
+						['class' => 'btn btn-primary btn-lg w-100']
 					) ?>
 
 					<div class="row registration-block">
@@ -48,7 +48,7 @@ use yii\helpers\Html;
 								['/user-management/auth/registration']
 							) ?>
 						</div>
-						<div class="col-sm-6 text-right">
+						<div class="col-sm-6 text-end">
 							<?= GhostHtml::a(
 								UserManagementModule::t('front', "Forgot password ?"),
 								['/user-management/auth/password-recovery']
