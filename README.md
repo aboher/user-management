@@ -239,8 +239,9 @@ Once everything is set up, you can access the identity of the logged-in user thr
 
 ```php
 
-Yii::$app->user->ref_identity;	// returns the id of the identity
-Yii::$app->user->identity();	// returns the instance of the Identity class from the user
+$user = User::findOne(Yii::$app->user->identity->getId());	// returns the user instance
+$identityId = $user->ref_identity;	// returns the identity id
+$identity = $user->identity;	// returns the identity instance
 
 ```
 
