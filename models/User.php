@@ -272,7 +272,14 @@ class User extends UserIdentity
 		];
 
 		if ($this->hasIdentityClass()) {
-            $rules[] = ['ref_identity', 'required', 'message' => UserManagementModule::t('back', 'Every user must have an identity')];
+            $rules[] = [
+				'ref_identity',
+				'required',
+				'when' => function ($model) {
+					return $model->superadmin !== 1;
+				},
+				'message' => UserManagementModule::t('back', 'Every user must have an identity')
+			];
 			$rules[] = ['ref_identity', 'unique', 'message' => UserManagementModule::t('back', 'This identity is already assigned to another user')];
 			$rules[] = ['ref_identity', 'integer'];
         }
