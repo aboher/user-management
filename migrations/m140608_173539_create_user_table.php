@@ -10,7 +10,7 @@ class m140608_173539_create_user_table extends Migration
 		$tableOptions = null;
 		if ( $this->db->driverName === 'mysql' )
 		{
-			$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+			$tableOptions = 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci';
 		}
 
 	        // Check if user Table exist
